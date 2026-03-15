@@ -39,7 +39,7 @@ function changeCard(isNext: boolean) {
     <div
       v-for="(product, index) in products"
       :key="product.code"
-      class="flex items-center px-8 pb-4"
+      class="flex items-center px-8 pb-4 w-full"
     >
       <ListCardComponent
         :product
