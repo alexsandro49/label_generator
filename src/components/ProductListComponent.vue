@@ -23,7 +23,6 @@ function changeCard(isNext: boolean) {
 
 onMounted(async () => {
   await productStore.fetchProducts();
-  console.log(productStore.products);
 });
 </script>
 
@@ -38,7 +37,23 @@ onMounted(async () => {
       :product-index="selectedProductIndex"
       @previous-card="changeCard(false)"
       @next-card="changeCard(true)"
+      @close-card="openFloatModalHandler(selectedProductIndex)"
     />
+
+    <div class="flex items-center gap-2 justify-center w-full mb-2">
+      <RouterLink
+        class="text-white text-xl font-bold border-dusk-blue border-2 rounded-2xl p-2 bg-dusk-blue hover:bg-[#efeeea] hover:text-dusk-blue cursor-pointer"
+        to="/edit"
+      >
+        ADICIONAR
+      </RouterLink>
+      <RouterLink
+        class="text-white text-xl font-bold border-sunflower-gold border-2 rounded-2xl p-2 bg-sunflower-gold hover:bg-[#efeeea] hover:text-sunflower-gold cursor-pointer"
+        to="/edit"
+      >
+        EDITAR
+      </RouterLink>
+    </div>
 
     <div
       v-for="(product, index) in productStore.products"

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faDownload, faXmark } from '@fortawesome/free-solid-svg-icons';
 import PreviewComponent from './PreviewComponent.vue';
 import { downloadPDF, printPDF } from '../shared/pdfmake';
 import { computed, onMounted } from 'vue';
 import { useProductStore } from '../stores/products';
 
-const emit = defineEmits(['previousCard', 'nextCard']);
+const emit = defineEmits(['previousCard', 'nextCard', 'closeCard']);
 
 const props = defineProps<{
   productIndex: number
@@ -23,13 +23,24 @@ onMounted(() => {
 
 <template>
   <div class="h-[60vh] bg-white flex flex-col justify-between">
-    <div>
-      <h2 class="text-2xl font-semibold mb-1">
-        {{ productStore.products[props.productIndex].name }}
-      </h2>
-      <p class="mb-2">
-        100mm x 50mm
-      </p>
+    <div class="flex w-full">
+      <div>
+        <h2 class="text-2xl font-semibold mb-1">
+          {{ productStore.products[props.productIndex].name }}
+        </h2>
+        <p class="mb-2">
+          100mm x 50mm
+        </p>
+      </div>
+
+      <button
+        class="w-[15%] h-[50%] border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer  text-xl border-dusk-blue"
+        @click.stop="() => emit('closeCard')"
+      >
+        <FontAwesomeIcon
+          :icon="faXmark"
+        />
+      </button>
     </div>
 
     <div class="w-full h-[60%] flex flex-col justify-between">
@@ -43,13 +54,17 @@ onMounted(() => {
           class="w-[15%] border-2 border-dusk-blue rounded-xl font-bold text-dusk-blue hover:bg-bright-marine hover:text-white cursor-pointer"
           @click.stop="emit('previousCard')"
         >
-          {{ '<' }}
+          <FontAwesomeIcon
+            :icon="faArrowLeft"
+          />
         </button>
         <button
           class="w-[15%] border-2 border-dusk-blue rounded-xl font-bold text-dusk-blue hover:bg-bright-marine hover:text-white cursor-pointer"
           @click.stop="emit('nextCard')"
         >
-          {{ '>' }}
+          <FontAwesomeIcon
+            :icon="faArrowRight"
+          />
         </button>
       </div>
     </div>
