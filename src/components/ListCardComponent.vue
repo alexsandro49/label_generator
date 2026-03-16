@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBarcode, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faBarcode, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faIndustry } from '@fortawesome/free-solid-svg-icons';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import type { Product } from '../shared/types';
@@ -21,7 +21,7 @@ const emit = defineEmits({
     class="w-full bg-[#efeeea] rounded-2xl border-dusk-blue border-3 p-4 box-content flex flex-col justify-between"
   >
     <h1
-      class="text-2xl font-bold text-[#2f4d60] cursor-pointer"
+      class="text-2xl font-bold text-[#2f4d60] mb-1 cursor-pointer"
       @click.stop="emit('openFloatModal', productIndex);"
     >
       {{ props.product.produto }}
@@ -53,7 +53,7 @@ const emit = defineEmits({
       </div>
       <FontAwesomeIcon
         class="p-1 border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer text-xl border-dusk-blue ml-auto"
-        :icon="faXmark"
+        :icon="faTrash"
         @click.stop="emit('removeProduct', props.productIndex)"
       />
     </div>

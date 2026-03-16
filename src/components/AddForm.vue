@@ -1,27 +1,44 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useProductStore } from '../stores/products';
 import type { Product } from '../shared/types';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
 const productStore = useProductStore();
-const nameInput = ref<HTMLInputElement | null>(null);
 const newProduct = ref<Product>({
   produto: '', codigo: '',
   codigo_fabrica: '', embalagem: '',
 });
 
+const nameInput = ref<HTMLInputElement | null>(null);
+const isValidForm = computed(() => {
+  if (newProduct.value.produto === '' || newProduct.value.codigo === '' || newProduct.value.codigo_fabrica === '' || newProduct.value.embalagem === '') {
+    return false;
+  }
+
+  return true;
+});
+const warningInvisible = ref(true);
+
+
 function saveNewUser() {
-  productStore.products.push(newProduct.value);
+  if (isValidForm.value) {
+    productStore.products.push(newProduct.value);
+  
+    router.push('/');
+  } else {
+    warningInvisible.value = false;
+  }
 
-  newProduct.value = {
-    produto: '', codigo: '',
-    codigo_fabrica: '', embalagem: '',
-  };  
-
-  router.push('/');
 }
+
+watch([() => Object.values(newProduct.value)], () => {
+  if (Object.values(newProduct.value).some(val => typeof val === 'string' && val.trim() !== '')) {
+    warningInvisible.value = true;
+  }
+});
 
 onMounted(async () => {
   newProduct.value = {
@@ -47,6 +64,7 @@ onMounted(async () => {
       <input
         ref="nameInput"
         v-model="newProduct.produto"
+        :required="true"
         class="flex-1 min-w-0 text-xl text-bright-marine placeholder:text-bright-marine underline"
       >
     </div>
@@ -81,9 +99,16 @@ onMounted(async () => {
       >
     </div>
 
+    <p
+      class="self-center mt-2 text-red-600"
+      :class="{invisible: warningInvisible}"
+    >
+      Todos os campos são obrigatórios
+    </p>
+
     <div class="flex self-center gap-2 mt-3 text-center">
       <button
-        class="border-2 bg-sunflower-gold border-sunflower-gold hover:bg-white hover:text-sunflower-gold w-[15vw] h-[5vh] text-white font-bold rounded-xl cursor-pointer flex items-center justify-center"
+        class="border-2 bg-sunflower-gold border-sunflower-gold hover:bg-white hover:text-sunflower-gold w-[20vw] h-[5vh] text-white font-bold rounded-xl cursor-pointer flex items-center justify-center"
         @click.prevent="saveNewUser"
       >
         SALVAR

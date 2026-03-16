@@ -16,9 +16,7 @@ export const useProductStore = defineStore(
     }
 
     function removeProduct(productIndex: number) {
-      const productToRemove = products.value[productIndex];
-
-      products.value = products.value.filter((product) => product.produto !== productToRemove.produto);
+      products.value.splice(productIndex, 1);
     }
 
     return {

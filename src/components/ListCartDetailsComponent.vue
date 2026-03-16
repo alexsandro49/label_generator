@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faArrowLeft, faArrowRight, faDownload, faXmark } from '@fortawesome/free-solid-svg-icons';
 import PreviewComponent from './PreviewComponent.vue';
 import { downloadPDF, printPDF } from '../shared/pdfmake';
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useProductStore } from '../stores/products';
 
 const emit = defineEmits(['previousCard', 'nextCard', 'closeCard']);
@@ -14,11 +14,6 @@ const props = defineProps<{
 
 const productStore = useProductStore();
 const pdfName = computed(() => `${productStore.products[props.productIndex].produto.split(' ')[0].toLocaleLowerCase()}-${productStore.products[props.productIndex].codigo}`);
-
-onMounted(() => {
-  productStore.fetchProducts();
-});
-
 </script>
 
 <template>
