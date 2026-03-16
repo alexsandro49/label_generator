@@ -14,7 +14,7 @@ export function generatePDF(value: string, product: Product) {
     }
 
     const urlParams = '#toolbar=0&navpanes=0&scrollbar=0&view=Fit';
-        frame!.src = URL.createObjectURL(blob) + urlParams;
+    frame!.src = URL.createObjectURL(blob) + urlParams;
 
   });
 }
@@ -128,10 +128,11 @@ export function docDefinition(product: Product): TDocumentDefinitions {
   };
 }
 
-export const pdfMake = pdfMakeModule.default || pdfMakeModule;
+const pdfMake: any = (pdfMakeModule as any).default || pdfMakeModule;
+const pdfFonts: any = pdfFontsModule;
 
-if (pdfFontsModule && pdfFontsModule.pdfMake) {
-  pdfMake.vfs = pdfFontsModule.pdfMake.vfs;
+if (pdfFonts && pdfFonts.pdfMake) {
+  pdfMake.vfs = pdfFonts.pdfMake.vfs;
 } else {
-  pdfMake.vfs = pdfFontsModule.vfs || {};
+  pdfMake.vfs = pdfFonts.vfs || {};
 }
