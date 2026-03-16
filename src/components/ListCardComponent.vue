@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { faBarcode, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faIndustry } from '@fortawesome/free-solid-svg-icons';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import type { Product } from '../shared/types';
@@ -11,7 +11,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits({
-  openFloatModal: (productIndex) => productIndex
+  openFloatModal: (productIndex) => productIndex,
+  removeProduct: (productIndex) => productIndex,
 });
 </script>
 
@@ -23,16 +24,16 @@ const emit = defineEmits({
       class="text-2xl font-bold text-[#2f4d60] cursor-pointer"
       @click.stop="emit('openFloatModal', productIndex);"
     >
-      {{ props.product.name }}
+      {{ props.product.produto }}
     </h1>
 
-    <div class="flex gap-6 text-xl font-bold text-[#646464]">
+    <div class="flex gap-6 text-xl font-bold text-[#646464] justify-start">
       <div class="flex items-center">
         <FontAwesomeIcon
           class="text-black text-xl cursor-pointer"
           :icon="faBarcode"
         />
-        <p>{{ props.product.code }}</p>
+        <p>{{ props.product.codigo }}</p>
       </div>
 
       <div class="flex items-center">
@@ -40,7 +41,7 @@ const emit = defineEmits({
           class="text-black text-xl cursor-pointer"
           :icon="faIndustry"
         />
-        <p>{{ props.product.factoryCode }}</p>
+        <p>{{ props.product.codigo_fabrica }}</p>
       </div>
 
       <div class="flex items-center">
@@ -48,8 +49,13 @@ const emit = defineEmits({
           class="text-black text-xl cursor-pointer"
           :icon="faBoxOpen"
         />
-        <p>{{ props.product.package }}</p>
+        <p>{{ props.product.embalagem }}</p>
       </div>
+      <FontAwesomeIcon
+        class="p-1 border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer text-xl border-dusk-blue ml-auto"
+        :icon="faXmark"
+        @click.stop="emit('removeProduct', props.productIndex)"
+      />
     </div>
   </div>
 </template>

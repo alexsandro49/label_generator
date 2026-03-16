@@ -13,7 +13,7 @@ const props = defineProps<{
 }>();
 
 const productStore = useProductStore();
-const pdfName = computed(() => `${productStore.products[props.productIndex].name.split(' ')[0].toLocaleLowerCase()}-${productStore.products[props.productIndex].code}`);
+const pdfName = computed(() => `${productStore.products[props.productIndex].produto.split(' ')[0].toLocaleLowerCase()}-${productStore.products[props.productIndex].codigo}`);
 
 onMounted(() => {
   productStore.fetchProducts();
@@ -23,10 +23,10 @@ onMounted(() => {
 
 <template>
   <div class="h-[60vh] bg-white flex flex-col justify-between">
-    <div class="flex w-full">
+    <div class="flex w-full justify-between items-start">
       <div>
         <h2 class="text-2xl font-semibold mb-1">
-          {{ productStore.products[props.productIndex].name }}
+          {{ productStore.products[props.productIndex].produto }}
         </h2>
         <p class="mb-2">
           100mm x 50mm
@@ -34,7 +34,7 @@ onMounted(() => {
       </div>
 
       <button
-        class="w-[15%] h-[50%] border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer  text-xl border-dusk-blue"
+        class="min-w-[15%] max-w-[15%] min-h-[5vh] max-h-[5vh] border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer  text-xl border-dusk-blue"
         @click.stop="() => emit('closeCard')"
       >
         <FontAwesomeIcon

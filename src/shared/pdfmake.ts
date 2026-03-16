@@ -70,7 +70,7 @@ export function docDefinition(product: Product): TDocumentDefinitions {
             ],
             [
               {
-                text: product.name,
+                text: product.produto,
                 style: 'header',
                 colSpan: 5,
               },
@@ -88,7 +88,7 @@ export function docDefinition(product: Product): TDocumentDefinitions {
             ],
             [
               {
-                text: product.code,
+                text: product.codigo,
                 bold: true,
                 alignment: 'center',
                 fontSize: 15,
@@ -96,7 +96,7 @@ export function docDefinition(product: Product): TDocumentDefinitions {
               },
               {},
               {
-                text: product.factoryCode,
+                text: product.codigo_fabrica,
                 bold: true,
                 alignment: 'center',
                 fontSize: 15,
@@ -104,7 +104,7 @@ export function docDefinition(product: Product): TDocumentDefinitions {
               },
               {},
               {
-                text: product.package,
+                text: product.embalagem,
                 bold: true,
                 alignment: 'center',
                 fontSize: 15,

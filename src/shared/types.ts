@@ -1,6 +1,6 @@
 export type Product = {
-    name: string,
-    code: string,
-    factoryCode: string,
-    package: string
+    produto: string,
+    codigo: string,
+    codigo_fabrica: string,
+    embalagem: string
 };
