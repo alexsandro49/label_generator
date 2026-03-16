@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useProductStore } from '../stores/products';
-import type { Product } from '../shared/types';
+import type { Product } from '../utils/types';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();

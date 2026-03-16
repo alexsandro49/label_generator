@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUpdated } from 'vue';
-import { generatePDF } from '../shared/pdfmake';
-import type { Product } from '../shared/types';
+import { generatePDF } from '../utils/pdfmake';
+import type { Product } from '../utils/types';
 
 const props = defineProps<{
 product: Product

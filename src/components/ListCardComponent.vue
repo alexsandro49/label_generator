@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faBarcode, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faIndustry } from '@fortawesome/free-solid-svg-icons';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
-import type { Product } from '../shared/types';
+import type { Product } from '../utils/types';
 
 const props = defineProps<{
   product: Product,

@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faArrowLeft, faArrowRight, faDownload, faXmark } from '@fortawesome/free-solid-svg-icons';
 import PreviewComponent from './PreviewComponent.vue';
-import { downloadPDF, printPDF } from '../shared/pdfmake';
+import { downloadPDF, printPDF } from '../utils/pdfmake';
 import { computed } from 'vue';
 import { useProductStore } from '../stores/products';
 

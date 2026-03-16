@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { Product } from '../shared/types';
-import productsJson from '../assets/products.json';
+import type { Product } from '../utils/types';
+import api from '../utils/shared';
 
 export const useProductStore = defineStore(
   'product',
@@ -10,7 +10,7 @@ export const useProductStore = defineStore(
     const isLoaded = ref(false);
 
     async function fetchProducts() {
-      products.value = productsJson;
+      products.value = (await api.get('/product')).data;
 
       isLoaded.value = true;
     }

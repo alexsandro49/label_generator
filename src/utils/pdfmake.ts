@@ -1,6 +1,6 @@
 import base64Image from '../assets/base64Image';
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { convertMmToPt } from './utils';
+import { convertMmToPt } from './shared';
 import type { Product } from './types';
 
 export async function generatePDF(value: string, product: Product) {
