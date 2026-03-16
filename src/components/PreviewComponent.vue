@@ -7,8 +7,8 @@ const props = defineProps<{
 product: Product
 }>();
 
-onMounted(() => generatePDF('previewIframe', props.product));
-onUpdated(() => generatePDF('previewIframe', props.product));
+onMounted(async () => await generatePDF('previewIframe', props.product));
+onUpdated(async () => await generatePDF('previewIframe', props.product));
 </script>
 
 <template>

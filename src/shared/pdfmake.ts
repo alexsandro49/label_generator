@@ -1,11 +1,9 @@
-import * as pdfMakeModule from 'pdfmake/build/pdfmake';
-import * as pdfFontsModule from 'pdfmake/build/vfs_fonts';
 import base64Image from '../assets/base64Image';
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { convertMmToPt } from './utils';
 import type { Product } from './types';
 
-export function generatePDF(value: string, product: Product) {
+export async function generatePDF(value: string, product: Product) {
   pdfMake.createPdf(docDefinition(product)).getBlob().then((blob: Blob) => {
     const frame = document.getElementById(value) as HTMLIFrameElement;
 
@@ -19,11 +17,11 @@ export function generatePDF(value: string, product: Product) {
   });
 }
 
-export function downloadPDF(productName: string, product: Product) {
+export async function downloadPDF(productName: string, product: Product) {
   pdfMake.createPdf(docDefinition(product)).download(`etiqueta-${productName}.pdf`);
 };
 
-export function printPDF(product: Product) {
+export async function printPDF(product: Product) {
   pdfMake.createPdf(docDefinition(product)).print();
 };
 
@@ -128,11 +126,27 @@ export function docDefinition(product: Product): TDocumentDefinitions {
   };
 }
 
-const pdfMake: any = (pdfMakeModule as any).default || pdfMakeModule;
-const pdfFonts: any = pdfFontsModule;
+async function testeasdf() {
+  if (typeof window === 'undefined') return null;
 
-if (pdfFonts && pdfFonts.pdfMake) {
-  pdfMake.vfs = pdfFonts.pdfMake.vfs;
-} else {
-  pdfMake.vfs = pdfFonts.vfs || {};
+  const pdfMakeModule = await import('pdfmake/build/pdfmake');
+  const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
+
+  const pdfMake: any = pdfMakeModule && (pdfMakeModule as any).default ? (pdfMakeModule as any).default : pdfMakeModule;
+  const pdfFonts: any = pdfFontsModule && (pdfFontsModule as any).default ? (pdfFontsModule as any).default : pdfFontsModule;
+
+  pdfMake.vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : pdfFonts.vfs;
+
+  pdfMake.fonts = {
+    Roboto: {
+      normal: 'Roboto-Regular.ttf',
+      bold: 'Roboto-Medium.ttf',
+      italics: 'Roboto-Italic.ttf',
+      bolditalics: 'Roboto-MediumItalic.ttf'
+    }
+  };
+
+  return pdfMake;
 }
+
+const pdfMake = await testeasdf();
