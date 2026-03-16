@@ -1,56 +1,56 @@
 [
   {
     "name": "ARAME FARPADO 250M NELORE",
-    "code": 52,
-    "factoryCode": 1079,
+    "code": "52",
+    "factoryCode": "1079",
     "package": "RL"
   },
   {
     "name": "ARAME LISO GALVANIZADO 700M BELGO",
-    "code": 53,
-    "factoryCode": 2045,
+    "code": "53",
+    "factoryCode": "2045",
     "package": "RL"
   },
   {
     "name": "GRAMPO PARA CERCA POLIDO 1X9",
-    "code": 54,
-    "factoryCode": 3012,
+    "code": "54",
+    "factoryCode": "3012",
     "package": "CX"
   },
   {
     "name": "TELA SOLDADA MULTY USO 1,00X25M",
-    "code": 55,
-    "factoryCode": 4088,
+    "code": "55",
+    "factoryCode": "4088",
     "package": "RL"
   },
   {
     "name": "ARAME FARPADO 400M MOTTO",
-    "code": 56,
-    "factoryCode": 1085,
+    "code": "56",
+    "factoryCode": "1085",
     "package": "RL"
   },
   {
     "name": "ESTICADOR PARA CERCA CATRACA 7/16",
-    "code": 57,
-    "factoryCode": 5021,
+    "code": "57",
+    "factoryCode": "5021",
     "package": "UN"
   },
   {
     "name": "ARAME OVALADO 1250M Z-700",
-    "code": 58,
-    "factoryCode": 2090,
+    "code": "58",
+    "factoryCode": "2090",
     "package": "RL"
   },
   {
     "name": "TELA MOSQUITEIRO NYLON 1,20X50M",
-    "code": 59,
-    "factoryCode": 4150,
+    "code": "59",
+    "factoryCode": "4150",
     "package": "RL"
   },
   {
     "name": "CONCERTINA SIMPLES 45CM X 8M",
-    "code": 60,
-    "factoryCode": 6033,
+    "code": "60",
+    "factoryCode": "6033",
     "package": "UN"
   }
 ]

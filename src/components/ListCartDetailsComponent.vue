@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import PreviewComponent from './PreviewComponent.vue';
 import { downloadPDF, printPDF } from '../shared/pdfmake';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useProductStore } from '../stores/products';
 
 const emit = defineEmits(['previousCard', 'nextCard']);
@@ -13,13 +13,10 @@ const props = defineProps<{
 }>();
 
 const productStore = useProductStore();
-const pdfName = ref('');
-
+const pdfName = computed(() => `${productStore.products[props.productIndex].name.split(' ')[0].toLocaleLowerCase()}-${productStore.products[props.productIndex].code}`);
 
 onMounted(() => {
   productStore.fetchProducts();
-
-  pdfName.value = `${productStore.products[props.productIndex].name.split(' ')[0].toLocaleLowerCase()}-${productStore.products[props.productIndex].code}`;
 });
 
 </script>
@@ -61,7 +58,7 @@ onMounted(() => {
     <div class="w-full h-[8%] flex justify-end gap-2">
       <button
         class="w-[15%] border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer  text-xl border-dusk-blue"
-        @click="() => downloadPDF(pdfName, productStore.products[productIndex])"
+        @click.stop="() => downloadPDF(pdfName, productStore.products[productIndex])"
       >
         <FontAwesomeIcon
           :icon="faDownload"
@@ -69,7 +66,7 @@ onMounted(() => {
       </button>
       <button
         class="w-[25%] border-2 border-dusk-blue rounded-xl bg-bright-marine text-white font-semibold hover:bg-white hover:text-bright-marine cursor-pointer"
-        @click="() => printPDF(productStore.products[productIndex])"
+        @click.stop="() => printPDF(productStore.products[productIndex])"
       >
         Imprimir
       </button>

@@ -21,19 +21,15 @@ function changeCard(isNext: boolean) {
   }
 }
 
-
-
 onMounted(async () => {
-  console.log('ok');
   await productStore.fetchProducts();
-  console.log('ok');
   console.log(productStore.products);
 });
 </script>
 
 <template>
   <main
-    class="bg-[#A3AFC4] w-full h-full box-content py-4 flex flex-col items-center"
+    class="w-full h-full box-content py-4 flex flex-col items-center"
     @click.stop="floatModalHidden = true"
   >
     <ListCartDetailsComponent
