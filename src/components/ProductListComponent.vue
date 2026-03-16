@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ListCardComponent from './ListCardComponent.vue';
-import productsJson from '../assets/products.json';
 import ListCartDetailsComponent from './ListCartDetailsComponent.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useProductStore } from '../stores/products';
 
-const products = ref(productsJson);
 const floatModalHidden = ref(true);
 const selectedProductIndex = ref(0);
+const productStore = useProductStore();
 
 function openFloatModalHandler(productIndex: number) {
   selectedProductIndex.value = productIndex;
@@ -14,12 +14,21 @@ function openFloatModalHandler(productIndex: number) {
 }
 
 function changeCard(isNext: boolean) {
-  if (isNext && selectedProductIndex.value < products.value.length) {
+  if (isNext && selectedProductIndex.value < productStore.products.length) {
     selectedProductIndex.value++;
   } else if (!isNext && selectedProductIndex.value > 0) {
     selectedProductIndex.value--;
   }
 }
+
+
+
+onMounted(async () => {
+  console.log('ok');
+  await productStore.fetchProducts();
+  console.log('ok');
+  console.log(productStore.products);
+});
 </script>
 
 <template>
@@ -30,14 +39,13 @@ function changeCard(isNext: boolean) {
     <ListCartDetailsComponent
       class="w-[85vw] z-40 fixed rounded-2xl p-8 mt-12"
       :class="{hidden: floatModalHidden}"
-      :products="products"
       :product-index="selectedProductIndex"
       @previous-card="changeCard(false)"
       @next-card="changeCard(true)"
     />
 
     <div
-      v-for="(product, index) in products"
+      v-for="(product, index) in productStore.products"
       :key="product.code"
       class="flex items-center px-8 pb-4 w-full"
     >

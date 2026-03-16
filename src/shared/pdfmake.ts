@@ -44,10 +44,10 @@ export function docDefinition(product: Product): TDocumentDefinitions {
       {
         layout: {
           defaultBorder: false,
-          fillColor: (rowIndex: number, node: any, columnIndex: number) =>
+          fillColor: (rowIndex: number, _: any, columnIndex: number) =>
             rowIndex == 3 && columnIndex % 2 == 0 ? '#c0c0c0' : null,
           paddingTop: () => 0,
-          paddingBottom: (rowIndex: number, node: any) => (rowIndex == 0 ? 1 : 0),
+          paddingBottom: (rowIndex: number) => (rowIndex == 0 ? 1 : 0),
           paddingLeft: () => 0,
           paddingRight: () => 0,
         },

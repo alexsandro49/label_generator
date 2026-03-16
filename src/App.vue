@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import HeaderComponent from './components/HeaderComponent.vue';
-import ProductListComponent from './components/ProductListComponent.vue';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <HeaderComponent />
-  <ProductListComponent />
+  <RouterView />
 </template>

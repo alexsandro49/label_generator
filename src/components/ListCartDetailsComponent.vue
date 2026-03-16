@@ -1,25 +1,34 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import type { Product } from '../shared/types';
 import PreviewComponent from './PreviewComponent.vue';
 import { downloadPDF, printPDF } from '../shared/pdfmake';
+import { onMounted, ref } from 'vue';
+import { useProductStore } from '../stores/products';
 
 const emit = defineEmits(['previousCard', 'nextCard']);
 
 const props = defineProps<{
-  products: Product[],
   productIndex: number
 }>();
 
-const pdfName = `${props.products[props.productIndex].name.split(' ')[0].toLowerCase()}-${props.products[props.productIndex].code}`;
+const productStore = useProductStore();
+const pdfName = ref('');
+
+
+onMounted(() => {
+  productStore.fetchProducts();
+
+  pdfName.value = `${productStore.products[props.productIndex].name.split(' ')[0].toLocaleLowerCase()}-${productStore.products[props.productIndex].code}`;
+});
+
 </script>
 
 <template>
   <div class="h-[60vh] bg-white flex flex-col justify-between">
     <div>
       <h2 class="text-2xl font-semibold mb-1">
-        {{ props.products[props.productIndex].name }}
+        {{ productStore.products[props.productIndex].name }}
       </h2>
       <p class="mb-2">
         100mm x 50mm
@@ -29,7 +38,7 @@ const pdfName = `${props.products[props.productIndex].name.split(' ')[0].toLower
     <div class="w-full h-[60%] flex flex-col justify-between">
       <PreviewComponent
         class="w-full h-[75%] self-center border-none bg-white"
-        :product="props.products[props.productIndex]"
+        :product="productStore.products[props.productIndex]"
       />
 
       <div class="w-full h-[18%] flex justify-center gap-2">
@@ -52,7 +61,7 @@ const pdfName = `${props.products[props.productIndex].name.split(' ')[0].toLower
     <div class="w-full h-[8%] flex justify-end gap-2">
       <button
         class="w-[15%] border-2 rounded-xl text-deep-navy hover:bg-bright-marine hover:text-white cursor-pointer  text-xl border-dusk-blue"
-        @click="() => downloadPDF(pdfName, props.products[productIndex])"
+        @click="() => downloadPDF(pdfName, productStore.products[productIndex])"
       >
         <FontAwesomeIcon
           :icon="faDownload"
@@ -60,7 +69,7 @@ const pdfName = `${props.products[props.productIndex].name.split(' ')[0].toLower
       </button>
       <button
         class="w-[25%] border-2 border-dusk-blue rounded-xl bg-bright-marine text-white font-semibold hover:bg-white hover:text-bright-marine cursor-pointer"
-        @click="() => printPDF(props.products[productIndex])"
+        @click="() => printPDF(productStore.products[productIndex])"
       >
         Imprimir
       </button>
