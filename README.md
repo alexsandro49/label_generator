@@ -1,4 +1,4 @@
-# 📊 Label Generator
+# 🏷️ Label Generator
 
 **Label Generator** é um projeto exemplo de uma aplicação web desenvolvida com HTML, CSS, Vue e pdfmake.
 O objetivo é demonstrar boas práticas na criação de interfaces modernas e reativas para impressão de etiquetas no formato 100mm x 500mm, as imprimindo no formato PDF.
@@ -6,9 +6,10 @@ O objetivo é demonstrar boas práticas na criação de interfaces modernas e re
 ---
 
 ## 📸 Preview
-
 ![Imagem da tela principal](https://github.com/alexsandro49/label_generator/blob/main/src/assets/screenshot.png)
-![Rascunho](https://github.com/alexsandro49/label_generator/blob/main/src/racunho-etiqueta.png)
+
+## 📸 Rascunho
+![Rascunho](https://github.com/alexsandro49/label_generator/blob/main/src/assets/rascunho-etiqueta.png)
 
 ---
 
