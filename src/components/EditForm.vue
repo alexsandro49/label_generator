@@ -11,7 +11,7 @@ const selectedProductIndex = ref(0);
 const nameInput = ref<HTMLInputElement | null>(null);
 
 function changeSelectedProduct(isNext: boolean) {
-  if (isNext && selectedProductIndex.value < productStore.products.length) {
+  if (isNext && selectedProductIndex.value < productStore.products.length - 1) {
     selectedProductIndex.value++;
   } else if (!isNext && selectedProductIndex.value > 0) {
     selectedProductIndex.value--;
