@@ -94,7 +94,7 @@ src/
    npm run dev
    ```
 
-#### O projeto estará disponível em http://localhost:5173/
+#### O projeto estará disponível em http://localhost:1573/
 
 ## License
 - [MIT](https://github.com/alexsandro49/label-generator/blob/main/LICENSE)
