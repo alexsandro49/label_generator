@@ -126,7 +126,7 @@ export function docDefinition(product: Product): TDocumentDefinitions {
   };
 }
 
-async function testeasdf() {
+async function getPdkMake() {
   if (typeof window === 'undefined') return null;
 
   const pdfMakeModule = await import('pdfmake/build/pdfmake');
@@ -149,4 +149,4 @@ async function testeasdf() {
   return pdfMake;
 }
 
-const pdfMake = await testeasdf();
+const pdfMake = await getPdkMake();
